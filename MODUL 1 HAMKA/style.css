@@ -1,0 +1,51 @@
+.navbar,
+.nav-link {
+  margin-left: 12px;
+}
+
+.nav-link:hover {
+  color: #0456c8 !important;
+  border-bottom: 1px solid #0456c8;
+}
+
+#tentangKami,
+#jenisMobil {
+  background: #b8e8fc;
+}
+
+footer {
+  background: #b8e8fc;
+  height: 40px;
+}
+
+.konten-banner iframe {
+  width: 400px;
+  height: 285px;
+}
+
+.lokasiKami iframe {
+  width: 450px;
+  height: 270px;
+}
+
+a {
+  text-decoration: none;
+  color: black;
+}
+
+a:hover {
+  color: #0456c8;
+  cursor: pointer;
+}
+
+@media (min-width: 968px) {
+  .konten-banner iframe {
+    width: 565px;
+    height: 315;
+  }
+
+  .lokasiKami iframe {
+    width: 720px;
+    height: 350px;
+  }
+}
