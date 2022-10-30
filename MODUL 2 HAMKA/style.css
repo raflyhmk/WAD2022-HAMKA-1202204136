@@ -1,0 +1,40 @@
+body {
+  font-family: "poppins";
+}
+
+.titleWelcome {
+  font-size: 32px;
+  letter-spacing: 2px;
+}
+
+.descWelcome {
+  font-size: 22px;
+  letter-spacing: 2px;
+}
+
+.list-group-item {
+  color: #0d6efd !important;
+}
+
+.book-now {
+  background: #f8f9fa !important;
+}
+
+/* my booking page */
+.titleThanks {
+  font-size: 18px;
+  letter-spacing: 2px;
+}
+
+.descThanks {
+  font-size: 16px;
+  letter-spacing: 2px;
+}
+
+.receipt {
+  font-size: 16px !important;
+}
+
+.detailReceipt {
+  font-size: 14px !important;
+}
