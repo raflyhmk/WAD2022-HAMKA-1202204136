@@ -76,18 +76,18 @@
       $hargaServices = 0;
       for ($i=0; $i < $count; $i++) { 
         if($layanan[$i]=="health protocol"){
-          $hargaServices = $hargaServices + 25000;
+          $hargaServices = $hargaServices += 25000;
         }
         if($layanan[$i]=="driver"){
-          $hargaServices = $hargaServices + 100000;
+          $hargaServices = $hargaServices += 100000;
         }
         if($layanan[$i]=="fuel filled"){
-          $hargaServices = $hargaServices + 250000;
+          $hargaServices = $hargaServices += 250000;
         }
       }
     }
 
-    $price = ($sewaMobil * $duration) + $hargaServices;
+    $price = $sewaMobil * $duration + $hargaServices;
     
     
     ?>
