@@ -1,0 +1,73 @@
+body {
+  font-family: "Raleway", sans-serif;
+}
+
+.jumbotron {
+  margin-top: 105px;
+}
+
+.banner .title {
+  font-weight: 700;
+  font-size: 56px;
+  line-height: 65.74px;
+  letter-spacing: 1.2px;
+  color: #212121;
+}
+
+.banner .desc {
+  font-weight: 400;
+  font-size: 20px;
+  line-height: 23px;
+  letter-spacing: 0.2px;
+  color: #757575;
+  margin-top: 16px;
+}
+
+.banner .btn-mycar {
+  color: #fff !important;
+  text-decoration: none;
+}
+
+.image-banner img {
+  width: 520px;
+  height: 395px;
+}
+
+/* insert page */
+
+.insert {
+  margin-top: 50px;
+}
+
+.insert .titleInsert {
+  font-weight: 700;
+  font-size: 32px;
+  line-height: 38px;
+  letter-spacing: 1.2px;
+}
+
+.insert .descInsert {
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 19px;
+  letter-spacing: 1.2px;
+  margin-top: 16px;
+}
+
+.form-input {
+  margin-top: 20px;
+}
+
+.form-input label {
+  font-weight: 600;
+  font-size: 20px;
+  line-height: 24px;
+  letter-spacing: 1.2px;
+  margin-bottom: 12px;
+}
+
+/* list car page */
+.btn-edit {
+  width: 140px !important;
+  border-radius: 20px;
+}
