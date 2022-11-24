@@ -17,10 +17,10 @@ $statusPembayaran = $_POST['statusPembayaran'];
 
  
 // update data ke database
-$update=mysqli_query($koneksi,"update showroom_wad set nama_mobil='$nama_mobil', pemilik_mobil='$namaPemilik', merk_mobil='$merkMobil', tanggal_beli='$tanggalBeli', deskripsi='$deskripsi', status_pembayaran='$statusPembayaran' where id_mobil='$id'");
+$update=mysqli_query($koneksi,"update showroom_wad set nama_mobil='$nama_mobil', pemilik_mobil='$namaPemilik', merk_mobil='$merkMobil', tanggal_beli='$tanggalBeli', deskripsi='$deskripsi', status_pembayaran='$statusPembayaran' where id_mobil='$id_mobil'");
 
 if($update){
-    $_SESSION['edit'] = 'data berhasil teredit';
+    $_SESSION['update'] = 'data berhasil teredit';
     header("location:../pages/ListCar-hamka.php");
 }else{
     echo 'data gagal di edit';
