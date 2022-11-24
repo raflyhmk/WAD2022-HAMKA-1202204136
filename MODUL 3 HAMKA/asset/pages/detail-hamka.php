@@ -2,7 +2,7 @@
 $id = $_GET['id_mobil'];
 include '../config/connector.php';
 $listMobil = mysqli_query($koneksi, "select * from showroom_wad where id_mobil = '$id'");
-while($data = mysqli_fetch_array($listMobil)){
+$data = mysqli_fetch_array($listMobil);
 ?>
 
 <!DOCTYPE html>
@@ -55,7 +55,7 @@ while($data = mysqli_fetch_array($listMobil)){
           </div>
         </div>
         <div class="d-flex">
-          <a href="./pages/add-hamka.php">
+          <a href="./add-hamka.php">
           <button class="btn btn-outline-dark" type="submit" style="color: white;">add car</button></a>
       </div>
       </div>
@@ -65,10 +65,22 @@ while($data = mysqli_fetch_array($listMobil)){
     <!-- list car -->
     <section id="insert">
       <div class="container insert">
+         <?php
+        session_start();
+            if(isset($_SESSION['edit'])){
+              ?>
+              <div class="alert alert-primary alert-dismissible fade show"   role="alert">
+               <?php echo $_SESSION['edit'];?>
+               <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+              </div>
+            <?php
+              unset($_SESSION['edit']);
+            }
+            ?>
         <h1 class="titleInsert">Edit</h1>
         <p class="descInsert">
           Edit mobil <?php echo $data['nama_mobil']?>
-          <input type="hidden" name="id_mobil" value="<?php echo $data['id_mobil']; ?>">
+          
         </p>
         <div class="row">
             <div class="col-md-5">
@@ -82,6 +94,7 @@ while($data = mysqli_fetch_array($listMobil)){
             <div class="col-md-7 form-input mt-0">
             <form enctype="multipart/form-data" method="POST" action="../config/update.php">
               <div class="mb-3">
+                <input type="hidden" name="id_mobil" value=<?php echo $data['id_mobil'];?>>
                 <label for="inputNamaMobil" class="form-label">Nama Mobil</label>
                 <input
                   type="text"
@@ -126,7 +139,7 @@ while($data = mysqli_fetch_array($listMobil)){
               </div>
               <div class="mb-3">
                 <label for="formFile" class="form-label">Foto</label>
-                <input class="form-control" type="file" id="formFile" name="foto" required/>
+                <input class="form-control" type="file" id="formFile" name="foto" disabled/>
               </div>
               <div class="mb-3">
                 <label for="statusPembayaran" class="form-label"
@@ -157,13 +170,13 @@ while($data = mysqli_fetch_array($listMobil)){
                 </div>
               </div>
               <div class="mb-3">
-                <button type="submit" class="btn btn-primary btn-edit">Edit</button>
+                <button type="submit" class="btn btn-primary btn-edit" name="btn-edit">Edit</button>
               </div>
             </form>
             </div>
         </div>
 <?php
-}
+
 ?>
       </div>
     </section>

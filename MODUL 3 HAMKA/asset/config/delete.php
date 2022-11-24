@@ -1,4 +1,6 @@
 <?php 
+session_start();
+
 // koneksi database
 include 'connector.php';
  
@@ -11,10 +13,11 @@ $hapus=mysqli_query($koneksi,"delete from showroom_wad where id_mobil='$id'");
  
 // mengalihkan halaman kembali ke index.php
 if($hapus){
-	header("location:../pages/ListCar-hamka.php");;
+	$_SESSION['hapus'] = 'data berhasil terhapus';
+	header("location:../pages/ListCar-hamka.php");
 }
 else{
-	echo "<h3 align='center'>Terjadi Kesalahan. <a href='tagihan.php'>Coba Lagi</a></h3>";
+	echo 'data gagal dihapus';
 }
  
 ?>

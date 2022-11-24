@@ -1,3 +1,7 @@
+<?php
+include '../config/connector.php';
+$listMobil = mysqli_query($koneksi, "select * from showroom_wad");
+?>
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -62,8 +66,46 @@
         <p class="descInsert">
           List Show Room Muhammad Rafly Hamka - 1202204136
         </p>
+
+
+        <?php
+        session_start();
+            if(isset($_SESSION['sukses'])){
+              ?>
+              <div class="alert alert-success alert-dismissible fade show"   role="alert">
+               <?php echo $_SESSION['sukses'];?>
+               <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+              </div>
+            <?php
+              unset($_SESSION['gagal']);
+            }
+            ?>
+            <?php
+            if(isset($_SESSION['hapus'])){
+              ?>
+              <div class="alert alert-danger alert-dismissible fade show"   role="alert">
+               <?php echo $_SESSION['hapus'];?>
+               <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+              </div>
+            <?php
+              unset($_SESSION['gagal']);
+            }
+            ?>
+            <?php
+            if(isset($_SESSION['edit'])){
+              ?>
+              <div class="alert alert-primary alert-dismissible fade show"   role="alert">
+               <?php echo $_SESSION['edit'];?>
+               <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+              </div>
+            <?php
+              unset($_SESSION['edit']);
+            }
+            ?>
+        
         <div class="row">
             <?php
+                
                 include '../config/connector.php';
                 $listMobil = mysqli_query($koneksi, 'select * from showroom_wad');
                 while($data = mysqli_fetch_array($listMobil)){
@@ -86,6 +128,15 @@
       </div>
     </section>
     <!-- end list car -->
+
+    <div class="container">
+      <div class="banyak">
+        <h3 class="descBanyak mt-3" style="color: #757575; font-size: 16px; text-transform: capitalize;">jumlah mobil <?php echo mysqli_num_rows($listMobil);?></h3>
+      </div>
+    </div>
+
+    
+
 
     <!-- Optional JavaScript; choose one of the two! -->
 

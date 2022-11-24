@@ -1,4 +1,6 @@
 <?php
+session_start();
+
 include 'connector.php';
 
 // menangkap name variabel
@@ -13,8 +15,14 @@ move_uploaded_file($file_foto, "../images/".$foto);
 $statusPembayaran = $_POST['statusPembayaran'];
 
 // insert mysql
-mysqli_query($koneksi,"insert into showroom_wad values('','$namaMobil','$namaPemilik','$merk', '$tanggalBeli', '$deskripsi', '$foto', '$statusPembayaran')");
+$insert=mysqli_query($koneksi,"insert into showroom_wad values('','$namaMobil','$namaPemilik','$merk', '$tanggalBeli', '$deskripsi', '$foto', '$statusPembayaran')");
 
+if($insert){
+    $_SESSION['sukses'] = 'data berhasil terinput';
+    header("location:../pages/ListCar-hamka.php");
+    
+}else{
+    echo 'data gagal terinput';
+}
 
-header("location:../index.php");
 ?>
