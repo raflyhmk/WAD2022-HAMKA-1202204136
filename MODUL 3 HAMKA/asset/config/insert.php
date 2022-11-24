@@ -15,7 +15,7 @@ move_uploaded_file($file_foto, "../images/".$foto);
 $statusPembayaran = $_POST['statusPembayaran'];
 
 // insert mysql
-$insert=mysqli_query($connector,"insert into showroom_wad values('','$namaMobil','$namaPemilik','$merk', '$tanggalBeli', '$deskripsi', '$foto', '$statusPembayaran')");
+$insert=mysqli_query($koneksi,"insert into showroom_wad values('','$namaMobil','$namaPemilik','$merk', '$tanggalBeli', '$deskripsi', '$foto', '$statusPembayaran')");
 
 if($insert){
     $_SESSION['sukses'] = 'data berhasil terinput';
