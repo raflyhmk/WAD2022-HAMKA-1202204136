@@ -34,6 +34,9 @@ include '../config/connector.php';
       background: none !important;
       color: #fff !important;
     }
+    .bg-primary{
+        background: <?php if(isset($_COOKIE['WarnaBG'])){ echo $_COOKIE['WarnaBG'];};?> !important;
+      }
     </style>
 
     <title>Hello, world!</title>
@@ -61,7 +64,7 @@ include '../config/connector.php';
         <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
           <div class="navbar-nav">
             <a class="nav-link active" aria-current="page" href="index.php">Home</a>
-            <a class="nav-link" href="./pages/ListCar-hamka.php">MyCar</a>
+            <a class="nav-link" href="./ListCar-hamka.php">MyCar</a>
           </div>
         </div>
         <div class="d-flex">
@@ -95,7 +98,7 @@ include '../config/connector.php';
                     <p class="desc mb-3">
                         At lacus vitae nulla sagittis scelerisque nisl. Pellentesque duis cursus vestibulum, facilisi ac, sed faucibus.
                     </p>
-                   <a href="./pages/ListCar-hamka.php">
+                   <a href="../pages/ListCar-hamka.php">
                      <button type="button" class="btn btn-primary btn-mycar mt-4">My Car</button>
                    </a>
                     <div class="w-100 mt-5"></div>

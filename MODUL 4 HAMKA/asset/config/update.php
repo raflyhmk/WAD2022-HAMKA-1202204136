@@ -38,25 +38,19 @@ if(isset($_POST['btn-update'])){
 
     if($password != $konfirmasiPassword){
 	    echo "<script>alert ('konfirmasi password mu salah'); document.location.href = '../pages/profile-hamka.php'</script>";
+    } else {
+        // update data ke database
+    $updateUsers=mysqli_query($koneksi,"update users set nama='$nama', email='$email', password='$password', no_hp='$no_hp' where id='$id'");
+        if($updateUsers){
+            $_SESSION['edit'] = 'data berhasil teredit';
+            header("location:../pages/profile-hamka.php");
+        } else  {
+            echo 'data gagal di edit';
+        }
     }
-
     if(!empty($_POST['WarnaBG'])){
         setcookie('WarnaBG', $_POST['WarnaBG'], $time + 3600, '/');
-    }
-    
-
-    // update data ke database
-    $updateUsers=mysqli_query($koneksi,"update users set nama='$nama', email='$email', password='$password', no_hp='$no_hp' where id='$id'");
-    
-
-    if($updateUsers){
-        $_SESSION['edit'] = 'data berhasil teredit';
-        header("location:../pages/profile-hamka.php");
-    } else{
-    echo 'data gagal di edit';
-    }
-
-    
+    } 
 }
 
  

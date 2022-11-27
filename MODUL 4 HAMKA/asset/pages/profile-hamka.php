@@ -2,8 +2,6 @@
 session_start();  
 include '../config/connector.php';
 
-
-    
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -60,12 +58,12 @@ include '../config/connector.php';
         </button>
         <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
           <div class="navbar-nav">
-            <a class="nav-link" href="../index.php">Home</a>
+            <a class="nav-link" href="../pages/home-hamka.php">Home</a>
             <a class="nav-link" href="../pages/ListCar-hamka.php">MyCar</a>
           </div>
         </div>
         <div class="d-flex">
-          <a href="./pages/add-hamka.php">
+          <a href="../pages/add-hamka.php">
           <button class="btn btn-outline-dark" type="submit" style="color: white;">add car</button></a>
           <div class="dropdown ms-4">
             <button class="btn btn-light dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
@@ -101,11 +99,9 @@ include '../config/connector.php';
             <input type="hidden" name="id" value="<?php echo $dataUser['id'];?>">
             
           <div class="mb-3">
-            <label for="inputNamaPemilik" class="form-label"
-              >Email</label
-            >
+            <label for="inputEmail" class="form-label">Email</label>
             <input
-              type="text"
+              type="email"
               class="form-control"
               value="<?php echo $dataUser['email'];?>"
               name="email"

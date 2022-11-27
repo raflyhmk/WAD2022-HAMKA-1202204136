@@ -29,6 +29,9 @@
       background: none !important;
       color: #fff !important;
     }
+    .bg-primary{
+        background: <?php if(isset($_COOKIE['WarnaBG'])){ echo $_COOKIE['WarnaBG'];};?> !important;
+      }
     </style>
 
     <title>Hello, world!</title>

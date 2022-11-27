@@ -1,3 +1,6 @@
+<?php
+include '../config/connector.php';
+?>
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -25,9 +28,22 @@
     <link rel="stylesheet" href="../style/style.css?v=1" />
 
     <title>Hello, world!</title>
+    <style>
+      .btn-light:hover {
+        background: none !important;
+        color: #fff !important;
+      }
+      .bg-primary{
+        background: <?php if(isset($_COOKIE['WarnaBG'])){ echo $_COOKIE['WarnaBG'];};?> !important;
+      }
+    </style>
   </head>
   <body>
     <!-- navbar -->
+    <?php
+    $getUser = mysqli_query($koneksi, "select * from users");
+    while($getName = mysqli_fetch_array($getUser)){
+    ?>
     <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
       <div class="container">
         <button
@@ -43,7 +59,7 @@
         </button>
         <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
           <div class="navbar-nav">
-            <a class="nav-link" href="../index.php">Home</a>
+            <a class="nav-link" href="../pages/home-hamka.php">Home</a>
             <a class="nav-link" href="../pages/ListCar-hamka.php">MyCar</a>
           </div>
         </div>
@@ -53,6 +69,9 @@
       </div>
       </div>
     </nav>
+    <?php
+    }
+    ?>
     <!-- end navbar -->
 
     <!-- insert form -->

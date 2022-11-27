@@ -32,9 +32,18 @@ $data = mysqli_fetch_array($listMobil);
     <link rel="stylesheet" href="../style/style.css?v=1" />
 
     <title>Hello, world!</title>
+    <style>
+      .bg-primary{
+        background: <?php if(isset($_COOKIE['WarnaBG'])){ echo $_COOKIE['WarnaBG'];};?> !important;
+      }
+    </style>
   </head>
   <body>
     <!-- navbar -->
+    <?php
+    $getUser = mysqli_query($koneksi, "select * from users");
+    while($getName = mysqli_fetch_array($getUser)){
+    ?>
     <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
       <div class="container">
         <button
@@ -50,16 +59,28 @@ $data = mysqli_fetch_array($listMobil);
         </button>
         <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
           <div class="navbar-nav">
-            <a class="nav-link" href="../index.php">Home</a>
+            <a class="nav-link" href="../pages/home-hamka.php">Home</a>
             <a class="nav-link" href="../pages/ListCar-hamka.php">MyCar</a>
           </div>
         </div>
         <div class="d-flex">
-          <a href="./add-hamka.php">
+          <a href="./pages/add-hamka.php">
           <button class="btn btn-outline-dark" type="submit" style="color: white;">add car</button></a>
-      </div>
+          <div class="dropdown ms-4">
+            <button class="btn btn-light dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+              <?php echo $getName['nama'];?>
+            </button>
+            <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+              <li><a class="dropdown-item" href="../pages/profile-hamka.php">Profile</a></li>
+              <li><a class="dropdown-item" href="../config/logout.php">Logout</a></li>
+            </ul>
+          </div>
+        </div>
       </div>
     </nav>
+    <?php
+    }
+    ?>
     <!-- end navbar -->
 
     <!-- list car -->
