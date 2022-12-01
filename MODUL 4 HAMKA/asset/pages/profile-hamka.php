@@ -40,7 +40,7 @@ include '../config/connector.php';
     <!-- navbar -->
     <?php
     $getUser = mysqli_query($koneksi, "select * from users WHERE email='$_SESSION[email]'");
-    $dataUser = mysqli_fetch_array($getUser)
+    $dataUser = mysqli_fetch_array($getUser);
     ?>
     <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
      
@@ -67,7 +67,7 @@ include '../config/connector.php';
           <button class="btn btn-outline-dark" type="submit" style="color: white;">add car</button></a>
           <div class="dropdown ms-4">
             <button class="btn btn-light dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
-              <?php echo $_SESSION['email'];?>
+              <?php echo $dataUser['nama'];?>
             </button>
             <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
               <li><a class="dropdown-item" href="../pages/profile-hamka.php">Profile</a></li>
