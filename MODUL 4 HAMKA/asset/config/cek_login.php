@@ -15,11 +15,11 @@ if($cek > 0){
     $time = time();
     if(!empty($_POST['remember'])){
         $checkbox = $_POST['remember'];
-        setcookie("email", $email, $time + 3600);
-        setcookie("password", $password, $time + 3600, '/');
-        setcookie("checkbox", $checkbox, $time + 3600, '/');
+        setcookie("email_cookies", $email, $time + 3600);
+        setcookie("password_cookies", $password, $time + 3600, '/');
+        setcookie("checkbox_cookies", $checkbox, $time + 3600, '/');
     }
     echo "<script>alert ('anda berhasil login'); document.location.href = '../pages/home-hamka.php'</script>";
 }else{
-    echo "<script>alert ('gagal login'); document.location.href = '../pages/login.php'</script>";
+    echo "<script>alert ('gagal login'); document.location.href = '../pages/login-hamka.php'</script>";
 }
