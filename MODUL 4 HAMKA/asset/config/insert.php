@@ -30,18 +30,18 @@ if(isset($_POST['btn-simpan'])){
 }
 
 
-if(isset($_POST['btn-register'])){
+if(isset($_POST['register'])){
     // menangkap name variabel register
     $email = $_POST['email'];
     $name = $_POST['name'];
     $password = $_POST['password'];
-    $konfirmasiPassword = $_POST['KonfirmasiPassword'];
+    $confpassword = $_POST['confpassword'];
     $NoHp = $_POST['NoHp'];
 
     if($password != $konfirmasiPassword){
 	    echo "<script>alert ('konfirmasi password mu salah'); document.location.href = '../pages/register-hamka.php'</script>";
     }
-    $cekEmail = mysqli_query($koneksi, "select email from users where email = '$email'");
+    $cekEmail = mysqli_query($koneksi, "select email from user_hamka where email = '$email'");
     $emailExist = mysqli_fetch_array($cekEmail, MYSQLI_NUM);
 
     if ($emailExist>0){
