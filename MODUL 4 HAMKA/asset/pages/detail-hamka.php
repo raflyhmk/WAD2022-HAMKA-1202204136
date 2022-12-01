@@ -1,4 +1,5 @@
 <?php
+session_start();
 $id = $_GET['id_mobil'];
 include '../config/connector.php';
 $listMobil = mysqli_query($koneksi, "select * from showroom_wad where id_mobil = '$id'");
@@ -38,12 +39,7 @@ $data = mysqli_fetch_array($listMobil);
       }
     </style>
   </head>
-  <body>
-    <!-- navbar -->
-    <?php
-    $getUser = mysqli_query($koneksi, "select * from users");
-    while($getName = mysqli_fetch_array($getUser)){
-    ?>
+  <b<!-- navbar -->
     <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
       <div class="container">
         <button
@@ -59,16 +55,16 @@ $data = mysqli_fetch_array($listMobil);
         </button>
         <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
           <div class="navbar-nav">
-            <a class="nav-link" href="../pages/home-hamka.php">Home</a>
-            <a class="nav-link" href="../pages/ListCar-hamka.php">MyCar</a>
+            <a class="nav-link active" aria-current="page" href="index.php">Home</a>
+            <a class="nav-link" href="./ListCar-hamka.php">MyCar</a>
           </div>
         </div>
         <div class="d-flex">
-          <a href="./pages/add-hamka.php">
+          <a href="../pages/add-hamka.php">
           <button class="btn btn-outline-dark" type="submit" style="color: white;">add car</button></a>
           <div class="dropdown ms-4">
             <button class="btn btn-light dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
-              <?php echo $getName['nama'];?>
+              <?php echo $_SESSION['email'];?>
             </button>
             <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
               <li><a class="dropdown-item" href="../pages/profile-hamka.php">Profile</a></li>
@@ -78,16 +74,12 @@ $data = mysqli_fetch_array($listMobil);
         </div>
       </div>
     </nav>
-    <?php
-    }
-    ?>
     <!-- end navbar -->
 
     <!-- list car -->
     <section id="insert">
       <div class="container insert">
          <?php
-        session_start();
             if(isset($_SESSION['edit'])){
               ?>
               <div class="alert alert-primary alert-dismissible fade show"   role="alert">

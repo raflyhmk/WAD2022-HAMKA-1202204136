@@ -1,4 +1,5 @@
 <?php
+session_start();
 include '../config/connector.php';
 ?>
 <!DOCTYPE html>
@@ -35,11 +36,7 @@ include '../config/connector.php';
     </style>
   </head>
   <body>
-    <!-- navbar -->
-    <?php
-    $getUser = mysqli_query($koneksi, "select * from users");
-    while($getName = mysqli_fetch_array($getUser)){
-    ?>
+   <!-- navbar -->
     <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
       <div class="container">
         <button
@@ -55,8 +52,8 @@ include '../config/connector.php';
         </button>
         <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
           <div class="navbar-nav">
-            <a class="nav-link" href="../pages/home-hamka.php">Home</a>
-            <a class="nav-link" href="#">MyCar</a>
+            <a class="nav-link active" aria-current="page" href="index.php">Home</a>
+            <a class="nav-link" href="./ListCar-hamka.php">MyCar</a>
           </div>
         </div>
         <div class="d-flex">
@@ -64,7 +61,7 @@ include '../config/connector.php';
           <button class="btn btn-outline-dark" type="submit" style="color: white;">add car</button></a>
           <div class="dropdown ms-4">
             <button class="btn btn-light dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
-              <?php echo $getName['nama'];?>
+              <?php echo $_SESSION['email'];?>
             </button>
             <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
               <li><a class="dropdown-item" href="../pages/profile-hamka.php">Profile</a></li>
@@ -74,9 +71,6 @@ include '../config/connector.php';
         </div>
       </div>
     </nav>
-    <?php
-    }
-    ?>
     <!-- end navbar -->
 
     <!-- list car -->
@@ -89,7 +83,6 @@ include '../config/connector.php';
 
 
         <?php
-        session_start();
             if(isset($_SESSION['sukses'])){
               ?>
               <div class="alert alert-success alert-dismissible fade show"   role="alert">

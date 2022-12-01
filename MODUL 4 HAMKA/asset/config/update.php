@@ -40,7 +40,7 @@ if(isset($_POST['btn-update'])){
 	    echo "<script>alert ('konfirmasi password mu salah'); document.location.href = '../pages/profile-hamka.php'</script>";
     } else {
         // update data ke database
-    $updateUsers=mysqli_query($koneksi,"update users set nama='$nama', email='$email', password='$password', no_hp='$no_hp' where id='$id'");
+    $updateUsers=mysqli_query($koneksi,"update users set nama='$nama', email='$email', password='$password', no_hp='$no_hp' where email='$_SESSION[email]'");
         if($updateUsers){
             $_SESSION['edit'] = 'data berhasil teredit';
             header("location:../pages/profile-hamka.php");

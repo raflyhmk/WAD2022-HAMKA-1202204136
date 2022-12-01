@@ -39,8 +39,8 @@ include '../config/connector.php';
   <body>
     <!-- navbar -->
     <?php
-    $getUser = mysqli_query($koneksi, "select * from users");
-    while($dataUser = mysqli_fetch_array($getUser)){
+    $getUser = mysqli_query($koneksi, "select * from users WHERE email='$_SESSION[email]'");
+    $dataUser = mysqli_fetch_array($getUser)
     ?>
     <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
      
@@ -67,7 +67,7 @@ include '../config/connector.php';
           <button class="btn btn-outline-dark" type="submit" style="color: white;">add car</button></a>
           <div class="dropdown ms-4">
             <button class="btn btn-light dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
-              <?php echo $dataUser['nama'];?>
+              <?php echo $_SESSION['email'];?>
             </button>
             <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
               <li><a class="dropdown-item" href="../pages/profile-hamka.php">Profile</a></li>
@@ -96,7 +96,7 @@ include '../config/connector.php';
               unset($_SESSION['gagal']);
             }
             ?>
-            <input type="hidden" name="id" value="<?php echo $dataUser['id'];?>">
+            <input type="hidden" name="id" value="<?php echo $_SESSION['email'];?>">
             
           <div class="mb-3">
             <label for="inputEmail" class="form-label">Email</label>
@@ -157,9 +157,7 @@ include '../config/connector.php';
       </div>
     </section>
     <!-- end insert forrm -->
-    <?php
-    }
-    ?>
+   
     <div class="container mt-5 mb-3">
         <img src="../images/logo-ead 1.png" alt="logo" >    
         <span class="ms-3">hamka_1202204136</span>  

@@ -1,4 +1,5 @@
 <?php
+session_start();
 include '../config/connector.php';
 ?>
 <!DOCTYPE html>
@@ -40,10 +41,6 @@ include '../config/connector.php';
   </head>
   <body>
     <!-- navbar -->
-    <?php
-    $getUser = mysqli_query($koneksi, "select * from users");
-    while($getName = mysqli_fetch_array($getUser)){
-    ?>
     <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
       <div class="container">
         <button
@@ -59,19 +56,25 @@ include '../config/connector.php';
         </button>
         <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
           <div class="navbar-nav">
-            <a class="nav-link" href="../pages/home-hamka.php">Home</a>
-            <a class="nav-link" href="../pages/ListCar-hamka.php">MyCar</a>
+            <a class="nav-link active" aria-current="page" href="index.php">Home</a>
+            <a class="nav-link" href="./ListCar-hamka.php">MyCar</a>
           </div>
         </div>
         <div class="d-flex">
-          <a href=".pages/add-hamka.php">
+          <a href="../pages/add-hamka.php">
           <button class="btn btn-outline-dark" type="submit" style="color: white;">add car</button></a>
-      </div>
+          <div class="dropdown ms-4">
+            <button class="btn btn-light dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+              <?php echo $_SESSION['email'];?>
+            </button>
+            <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+              <li><a class="dropdown-item" href="../pages/profile-hamka.php">Profile</a></li>
+              <li><a class="dropdown-item" href="../config/logout.php">Logout</a></li>
+            </ul>
+          </div>
+        </div>
       </div>
     </nav>
-    <?php
-    }
-    ?>
     <!-- end navbar -->
 
     <!-- insert form -->
