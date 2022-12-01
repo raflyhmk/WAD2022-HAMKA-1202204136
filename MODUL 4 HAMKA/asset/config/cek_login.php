@@ -21,5 +21,5 @@ if($cek > 0){
     }
     echo "<script>alert ('anda berhasil login'); document.location.href = '../pages/home-hamka.php'</script>";
 }else{
-    echo "<script>alert ('gagal login'); document.location.href = '../index.php'</script>";
+    echo "<script>alert ('gagal login'); document.location.href = '../pages/login.php'</script>";
 }
