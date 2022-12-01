@@ -30,12 +30,12 @@ if(isset($_POST['btn-simpan'])){
 }
 
 
-if(isset($_POST['register'])){
+if(isset($_POST['btn-register'])){
     // menangkap name variabel register
     $email = $_POST['email'];
     $name = $_POST['name'];
     $password = $_POST['password'];
-    $confpassword = $_POST['confpassword'];
+    $konfirmasiPassword = $_POST['konfirmasipassword'];
     $NoHp = $_POST['NoHp'];
 
     if($password != $konfirmasiPassword){
