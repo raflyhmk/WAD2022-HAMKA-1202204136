@@ -35,7 +35,7 @@ if(isset($_POST['btn-register'])){
     $email = $_POST['email'];
     $name = $_POST['name'];
     $password = $_POST['password'];
-    $konfirmasiPassword = $_POST['konfirmasipassword'];
+    $konfirmasiPassword = $_POST['KonfirmasiPassword'];
     $NoHp = $_POST['NoHp'];
 
     if($password != $konfirmasiPassword){
