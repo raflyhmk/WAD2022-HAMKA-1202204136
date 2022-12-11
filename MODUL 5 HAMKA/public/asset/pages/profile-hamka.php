@@ -70,7 +70,7 @@ include '../config/connector.php';
               <?php echo $dataUser['nama'];?>
             </button>
             <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-              <li><a class="dropdown-item" href="../pages/profile-hamka.php">Profile</a></li>
+              <li><a class="dropdown-item" href="../pages/profile.php">Profile</a></li>
               <li><a class="dropdown-item" href="../config/logout.php">Logout</a></li>
             </ul>
           </div>
@@ -148,7 +148,8 @@ include '../config/connector.php';
                 <option value='#A4BE7B'>Hijau</option>
                 <option value='#9E7676'>Cokelat</option>
               </select>
-          </div>
+            </div>
+            
           <div class="mb-3 d-flex justify-content-center">
             <button type="submit" class="btn btn-primary" name="btn-update" >Update</button>
           </div>

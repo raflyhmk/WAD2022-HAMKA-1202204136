@@ -1,7 +1,6 @@
 <?php
-session_start();  
+session_start();
 include '../config/connector.php';
-
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -28,22 +27,25 @@ include '../config/connector.php';
 
     <!-- css style -->
     <link rel="stylesheet" href="../style/style.css?v=1" />
+
+    <title>Hello, world!</title>
     <style>
+      .btn-light:hover {
+        background: none !important;
+        color: #fff !important;
+      }
       .bg-primary{
         background: <?php if(isset($_COOKIE['WarnaBG'])){ echo $_COOKIE['WarnaBG'];};?> !important;
       }
     </style>
-
-    <title>Hello, world!</title>
   </head>
   <body>
     <!-- navbar -->
     <?php
-    $getUser = mysqli_query($koneksi, "select * from users WHERE email='$_SESSION[email]'");
-    $dataUser = mysqli_fetch_array($getUser);
+    $name = mysqli_query($koneksi, "select nama from users where email='$_SESSION[email]'");
+    $getName = mysqli_fetch_array($name);
     ?>
     <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
-     
       <div class="container">
         <button
           class="navbar-toggler"
@@ -58,8 +60,8 @@ include '../config/connector.php';
         </button>
         <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
           <div class="navbar-nav">
-            <a class="nav-link" href="../pages/home-hamka.php">Home</a>
-            <a class="nav-link" href="../pages/ListCar-hamka.php">MyCar</a>
+            <a class="nav-link active" aria-current="page" href="index.php">Home</a>
+            <a class="nav-link" href="./ListCar-hamka.php">MyCar</a>
           </div>
         </div>
         <div class="d-flex">
@@ -67,7 +69,7 @@ include '../config/connector.php';
           <button class="btn btn-outline-dark" type="submit" style="color: white;">add car</button></a>
           <div class="dropdown ms-4">
             <button class="btn btn-light dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
-              <?php echo $dataUser['nama'];?>
+              <?php echo $getName['nama'];?>
             </button>
             <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
               <li><a class="dropdown-item" href="../pages/profile-hamka.php">Profile</a></li>
@@ -82,85 +84,98 @@ include '../config/connector.php';
     <!-- insert form -->
     <section id="insert">
       <div class="container insert">
-        
-        <h1 class="titleInsert" align="center">Profile</h1>
-        <form enctype="multipart/form-data" method="POST" action="../config/update.php" class="form-input" name="form-edit">
-          <?php
-            if(isset($_SESSION['edit'])){
-              ?>
-              <div class="alert alert-primary alert-dismissible fade show"   role="alert">
-               <?php echo $_SESSION['edit'];?>
-               <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-              </div>
-            <?php
-              unset($_SESSION['gagal']);
-            }
-            ?>
-            <input type="hidden" name="id" value="<?php echo $_SESSION['email'];?>">
-            
+        <h1 class="titleInsert">Tambah mobil</h1>
+        <p class="descInsert">Tambah Mobil baru anda ke list show room</p>
+        <hr>
+        <form enctype="multipart/form-data" method="POST" action="../config/insert.php" class="form-input" >
           <div class="mb-3">
-            <label for="inputEmail" class="form-label">Email</label>
+            <label for="inputNamaMobil" class="form-label">Nama mobil</label>
             <input
-              type="email"
+              type="text"
               class="form-control"
-              value="<?php echo $dataUser['email'];?>"
-              name="email"
+              placeholder="masukan nama mobil..."
+              name="namaMobil"
+              required
             />
           </div>
           <div class="mb-3">
             <label for="inputNamaPemilik" class="form-label"
-              >Nama</label
+              >Nama Pemilik</label
             >
             <input
               type="text"
               class="form-control"
-              value="<?php echo $dataUser['nama'];?>"
-              name="nama"
+              placeholder="Nama - NIM"
+              name="namaPemilik"
               required
             />
           </div>
           <div class="mb-3">
-            <label for="inputMerk" class="form-label">Nomor handphone</label>
+            <label for="inputMerk" class="form-label">Merk</label>
             <input
               type="text"
               class="form-control"
-              value="<?php echo $dataUser['no_hp'];?>"
-              name="no_hp"
+              placeholder="Masukan merk mobil..."
+              name="merk"
               required
             />
           </div>
-          <hr>
           <div class="mb-3">
             <label for="inputTanggalBeli" class="form-label"
-              >Kata sandi</label
+              >Tanggal Beli</label
             >
-            <input type="password" class="form-control" name="password" placeholder="masukan kata sandi..." required />
+            <input type="date" class="form-control" name="tanggalBeli" required />
           </div>
           <div class="mb-3">
-            <label for="inputMerk" class="form-label">Konfirmasi password</label>
-           <input type="password" class="form-control" name="konfirmasiPassword" placeholder="Ulangi kata sandi..." required />
+            <label for="inputMerk" class="form-label">Deskripsi</label>
+            <textarea
+              class="form-control"
+              placeholder="Masukan deskripsi mobil disini..."
+              name="deskripsi"
+              required
+            ></textarea>
           </div>
           <div class="mb-3">
-              <label for="startTime" class="form-label">Warna navbar</label>
-              <select class="form-select" name="WarnaBG">
-                <option selected disabled value="">Pilih warna untuk navbar</option>
-                <option value='#0d6efd'>Biru</option>
-                <option value='#A4BE7B'>Hijau</option>
-                <option value='#9E7676'>Cokelat</option>
-              </select>
+            <label for="formFile" class="form-label">Foto</label>
+            <input class="form-control" type="file" id="formFile" name="foto" required/>
           </div>
-          <div class="mb-3 d-flex justify-content-center">
-            <button type="submit" class="btn btn-primary" name="btn-update" >Update</button>
+
+          <div class="mb-3">
+            <label for="statusPembayaran" class="form-label"
+              >Status Pembayaran</label
+            >
+            <div class="w-100"></div>
+            <div class="form-check form-check-inline">
+              <input
+                class="form-check-input"
+                type="radio"
+                name="statusPembayaran"
+                id="lunas"
+                value="lunas"
+                required
+              />
+              <label class="form-check-label" for="lunas" style="font-weight:300; font-size:16px;">Lunas</label>
+            </div>
+            <div class="form-check form-check-inline">
+              <input
+                class="form-check-input"
+                type="radio"
+                name="statusPembayaran"
+                id="belum lunas"
+                value="belum lunas"
+                required
+              />
+              <label class="form-check-label" for="belum lunas" style="font-weight:300;font-size:16px;">Belum Lunas</label>
+            </div>
+          </div>
+
+          <div class="mb-3">
+            <button type="submit" class="btn btn-primary" name="btn-simpan">Selesai</button>
           </div>
         </form>
       </div>
     </section>
     <!-- end insert forrm -->
-   
-    <div class="container mt-5 mb-3">
-        <img src="../images/logo-ead 1.png" alt="logo" >    
-        <span class="ms-3">hamka_1202204136</span>  
-    </div> 
 
     <!-- Optional JavaScript; choose one of the two! -->
 

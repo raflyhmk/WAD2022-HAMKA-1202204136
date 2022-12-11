@@ -1,7 +1,6 @@
 <?php
-session_start();  
+session_start();
 include '../config/connector.php';
-
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -28,22 +27,21 @@ include '../config/connector.php';
 
     <!-- css style -->
     <link rel="stylesheet" href="../style/style.css?v=1" />
+
+    <title>Hello, world!</title>
     <style>
       .bg-primary{
         background: <?php if(isset($_COOKIE['WarnaBG'])){ echo $_COOKIE['WarnaBG'];};?> !important;
       }
     </style>
-
-    <title>Hello, world!</title>
   </head>
   <body>
-    <!-- navbar -->
-    <?php
-    $getUser = mysqli_query($koneksi, "select * from users WHERE email='$_SESSION[email]'");
-    $dataUser = mysqli_fetch_array($getUser);
+   <!-- navbar -->
+   <?php
+    $name = mysqli_query($koneksi, "select nama from users where email='$_SESSION[email]'");
+    $getName = mysqli_fetch_array($name);
     ?>
     <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
-     
       <div class="container">
         <button
           class="navbar-toggler"
@@ -58,7 +56,7 @@ include '../config/connector.php';
         </button>
         <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
           <div class="navbar-nav">
-            <a class="nav-link" href="../pages/home-hamka.php">Home</a>
+            <a class="nav-link active" aria-current="page" href="../pages/home-hamka.php">Home</a>
             <a class="nav-link" href="../pages/ListCar-hamka.php">MyCar</a>
           </div>
         </div>
@@ -67,7 +65,7 @@ include '../config/connector.php';
           <button class="btn btn-outline-dark" type="submit" style="color: white;">add car</button></a>
           <div class="dropdown ms-4">
             <button class="btn btn-light dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
-              <?php echo $dataUser['nama'];?>
+              <?php echo $getName['nama'];?>
             </button>
             <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
               <li><a class="dropdown-item" href="../pages/profile-hamka.php">Profile</a></li>
@@ -79,13 +77,38 @@ include '../config/connector.php';
     </nav>
     <!-- end navbar -->
 
-    <!-- insert form -->
+    <!-- list car -->
     <section id="insert">
       <div class="container insert">
-        
-        <h1 class="titleInsert" align="center">Profile</h1>
-        <form enctype="multipart/form-data" method="POST" action="../config/update.php" class="form-input" name="form-edit">
-          <?php
+        <h1 class="titleInsert">My Show Room</h1>
+        <p class="descInsert">
+          List Show Room Muhammad Rafly Hamka - 1202204136
+        </p>
+
+
+        <?php
+            if(isset($_SESSION['sukses'])){
+              ?>
+              <div class="alert alert-success alert-dismissible fade show"   role="alert">
+               <?php echo $_SESSION['sukses'];?>
+               <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+              </div>
+            <?php
+              unset($_SESSION['gagal']);
+            }
+            ?>
+            <?php
+            if(isset($_SESSION['hapus'])){
+              ?>
+              <div class="alert alert-danger alert-dismissible fade show"   role="alert">
+               <?php echo $_SESSION['hapus'];?>
+               <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+              </div>
+            <?php
+              unset($_SESSION['gagal']);
+            }
+            ?>
+            <?php
             if(isset($_SESSION['edit'])){
               ?>
               <div class="alert alert-primary alert-dismissible fade show"   role="alert">
@@ -93,74 +116,43 @@ include '../config/connector.php';
                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
               </div>
             <?php
-              unset($_SESSION['gagal']);
+              unset($_SESSION['edit']);
             }
             ?>
-            <input type="hidden" name="id" value="<?php echo $_SESSION['email'];?>">
-            
-          <div class="mb-3">
-            <label for="inputEmail" class="form-label">Email</label>
-            <input
-              type="email"
-              class="form-control"
-              value="<?php echo $dataUser['email'];?>"
-              name="email"
-            />
-          </div>
-          <div class="mb-3">
-            <label for="inputNamaPemilik" class="form-label"
-              >Nama</label
-            >
-            <input
-              type="text"
-              class="form-control"
-              value="<?php echo $dataUser['nama'];?>"
-              name="nama"
-              required
-            />
-          </div>
-          <div class="mb-3">
-            <label for="inputMerk" class="form-label">Nomor handphone</label>
-            <input
-              type="text"
-              class="form-control"
-              value="<?php echo $dataUser['no_hp'];?>"
-              name="no_hp"
-              required
-            />
-          </div>
-          <hr>
-          <div class="mb-3">
-            <label for="inputTanggalBeli" class="form-label"
-              >Kata sandi</label
-            >
-            <input type="password" class="form-control" name="password" placeholder="masukan kata sandi..." required />
-          </div>
-          <div class="mb-3">
-            <label for="inputMerk" class="form-label">Konfirmasi password</label>
-           <input type="password" class="form-control" name="konfirmasiPassword" placeholder="Ulangi kata sandi..." required />
-          </div>
-          <div class="mb-3">
-              <label for="startTime" class="form-label">Warna navbar</label>
-              <select class="form-select" name="WarnaBG">
-                <option selected disabled value="">Pilih warna untuk navbar</option>
-                <option value='#0d6efd'>Biru</option>
-                <option value='#A4BE7B'>Hijau</option>
-                <option value='#9E7676'>Cokelat</option>
-              </select>
-          </div>
-          <div class="mb-3 d-flex justify-content-center">
-            <button type="submit" class="btn btn-primary" name="btn-update" >Update</button>
-          </div>
-        </form>
+        
+        <div class="row">
+            <?php
+                include '../config/connector.php';
+                $listMobil = mysqli_query($koneksi, "select * from showroom_wad");  
+                while($data = mysqli_fetch_array($listMobil)){
+            ?>
+            <div class="col-md-4 mb-4">
+                <div class="card" style="width: 22rem;">
+                <img src="../images/<?php echo $data['foto_mobil']?>" class="card-img-top m-auto mt-3" alt="gambar mobil" style="width:328px; height:195px;">
+                    <div class="card-body">
+                        <h5 class="card-title"><?php echo $data['nama_mobil'];?></h5>
+                        <p class="card-text"><?php echo substr($data['deskripsi'],0,90);?>...</p>
+                        <a href="../pages/detail-hamka.php?id_mobil=<?php echo $data['id_mobil'];?>" class="btn btn-primary btn-edit me-4">Detail</a>
+                        <a href="../config/delete.php?id_mobil=<?php echo $data['id_mobil'];?>" class="btn btn-danger btn-edit">Hapus</a>
+                    </div>
+                </div>
+            </div>
+            <?php
+            }
+            ?>
+        </div>
       </div>
     </section>
-    <!-- end insert forrm -->
-   
-    <div class="container mt-5 mb-3">
-        <img src="../images/logo-ead 1.png" alt="logo" >    
-        <span class="ms-3">hamka_1202204136</span>  
-    </div> 
+    <!-- end list car -->
+
+    <div class="container">
+      <div class="banyak">
+        <h3 class="descBanyak mt-3" style="color: #757575; font-size: 16px; text-transform: capitalize;">jumlah mobil <?php echo mysqli_num_rows($listMobil);?></h3>
+      </div>
+    </div>
+
+    
+
 
     <!-- Optional JavaScript; choose one of the two! -->
 
@@ -171,8 +163,6 @@ include '../config/connector.php';
       crossorigin="anonymous"
     ></script>
 
-
-
     <!-- Option 2: Separate Popper and Bootstrap JS -->
     <!--
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js" integrity="sha384-7+zCNj/IqJ95wo16oMtfsKbZ9ccEh31eOz1HGyDuCQ6wgnyJNSYdrPa03rtR1zdB" crossorigin="anonymous"></script>
@@ -180,3 +170,5 @@ include '../config/connector.php';
     -->
   </body>
 </html>
+
+
