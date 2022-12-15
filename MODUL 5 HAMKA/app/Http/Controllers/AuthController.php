@@ -31,7 +31,7 @@ class AuthController extends Controller
 
         Session::flash('status', 'failed');
         Session::flash('message', 'proses login gagal');
-        return view('/LoginHamka');
+        return redirect('/LoginHamka');
 
     }
     public function Logout(Request $request){
