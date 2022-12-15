@@ -44,6 +44,6 @@ class User extends Authenticatable
     ];
 
     public function showroom(){
-        return $this->hasMany(showroom::class);
+        return $this->hasOne(showroom::class);
     }
 }
